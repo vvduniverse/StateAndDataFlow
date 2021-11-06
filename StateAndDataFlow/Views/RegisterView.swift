@@ -8,15 +8,22 @@
 import SwiftUI
 
 struct RegisterView: View {
+    
+//    @AppStorage("username") var username: String = ""
+//    @AppStorage("userregistered") var userreg: Bool = false
+    
     @State private var userName = ""
     @EnvironmentObject private var user: UserManager
-    @AppStorage("username") var username: String = ""
-    @AppStorage("userregistered") var userreg: Bool = false
+    
+//    private func setName() {
+//        userName = username
+//        user.name = username
+//    }
     
     
     var body: some View {
         VStack {
-            
+
             HStack {
                 TextField("Enter your name...", text: $userName)
                     .multilineTextAlignment(.center)
@@ -35,9 +42,9 @@ struct RegisterView: View {
         if !userName.isEmpty {
             user.name = userName
             user.isRegistered.toggle()
-            
-            username = userName
-            userreg.toggle()
+//            
+//            username = userName
+//            userreg.toggle()
         }
     }
 }

@@ -8,10 +8,17 @@
 import SwiftUI
 
 struct StarterView: View {
+    
+
+    
     @EnvironmentObject private var user: UserManager
+    
+//    @AppStorage("userregistered") var userreg: Bool = false
+    
     var body: some View {
         Group {
             if user.isRegistered {
+//                if userreg {
                 ContentView()
             } else {
                 RegisterView()

@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+//    @AppStorage("username") var username: String = ""
+//    @AppStorage("userregistered") var userreg: Bool = false
+    
     @StateObject private var timer = TimeCounter()
     @EnvironmentObject private var userManager: UserManager
     
@@ -20,25 +24,17 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .padding(.top, 200)
             Spacer()
-            ButtonView(timer: timer, color: Color.red)
+            ButtonView(color: .red, title: timer.buttonTitle) {
+                timer.startTimer()
+            }
             Spacer()
-            ButtonView(timer: timer, color: Color.blue)
-            Button(action: {
+            ButtonView(color: .blue, title: "LogOut") {
                 userManager.isRegistered.toggle()
                 userManager.name = ""
-            }) {
-                Text("LogOut")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
+//                username = ""
+//                userreg = false
             }
-            .frame(width: 200, height: 60)
-            .background(Color.blue)
-            .cornerRadius(20)
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.black, lineWidth: 4)
-            )
+            
         }
     }
 }
