@@ -10,6 +10,9 @@ import SwiftUI
 struct RegisterView: View {
     @State private var userName = ""
     @EnvironmentObject private var user: UserManager
+    @AppStorage("username") var username: String = ""
+    @AppStorage("userregistered") var userreg: Bool = false
+    
     
     var body: some View {
         VStack {
@@ -17,7 +20,7 @@ struct RegisterView: View {
             HStack {
                 TextField("Enter your name...", text: $userName)
                     .multilineTextAlignment(.center)
-                CountingLabel(count: userName.count)         
+                CountingLabelView(count: userName.count)         
             }
             Button(action: registerUser) {
                 HStack {
@@ -32,6 +35,9 @@ struct RegisterView: View {
         if !userName.isEmpty {
             user.name = userName
             user.isRegistered.toggle()
+            
+            username = userName
+            userreg.toggle()
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CountingLabel: View {
+struct CountingLabelView: View {
     
     var count: Int
     
@@ -20,6 +20,6 @@ struct CountingLabel: View {
 
 struct CounLabel_Previews: PreviewProvider {
     static var previews: some View {
-        CountingLabel(count: 3)
+        CountingLabelView(count: 4)
     }
 }
