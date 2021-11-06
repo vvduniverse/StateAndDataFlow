@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var timer = TimeCounter()
     @EnvironmentObject private var userManager: UserManager
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack {
@@ -20,8 +21,24 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .padding(.top, 200)
             Spacer()
-            ButtonView(timer: timer)
+            ButtonView(timer: timer, color: Color.red)
             Spacer()
+//            Button(Text("Click to show"), destination: RegisterView())
+            Button(action: {
+                userManager.name = ""
+            }) {
+                Text("LogOut")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+            }
+            .frame(width: 200, height: 60)
+            .background(Color.blue)
+            .cornerRadius(20)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.black, lineWidth: 4)
+            )
         }
     }
 }
@@ -33,22 +50,4 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct ButtonView: View {
-    @ObservedObject var timer: TimeCounter
-    
-    var body: some View {
-        Button(action: { timer.startTimer() }) {
-            Text(timer.buttonTitle)
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-        }
-        .frame(width: 200, height: 60)
-        .background(Color.red)
-        .cornerRadius(20)
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.black, lineWidth: 4)
-        )
-    }
-}
+
